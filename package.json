@@ -13,8 +13,8 @@
     "@emotion/styled": "^11.10.5",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.10.14",
-    "@mui/material": "^5.10.11",
-    "@mui/styled-engine-sc": "^5.10.6",
+    "@mui/material": "^5.10.14",
+    "@mui/styled-engine-sc": "^5.10.14",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,10 +23,10 @@
     "web3modal": "^1.9.9"
   },
   "devDependencies": {
-    "@types/react": "^18.0.22",
-    "@types/react-dom": "^18.0.7",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^2.2.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.0"
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4"
   }
 }

@@ -4,9 +4,7 @@ import useCoinswap from "../hooks/useCoinswap";
 
 export default function CoinswapPage() {
   const {buy, sell, amountAT3, setAmountAT3, amountETH, setAmountETH, balanceOfAT3, DexAT3Balance} = useCoinswap();
-  // @ts-ignore
-  // @ts-ignore
-  return (
+    return (
     <Container>
 
       <div>Your balance of AT3 - {balanceOfAT3}</div>
@@ -18,13 +16,13 @@ export default function CoinswapPage() {
         Wei to AT3 (you are specifying wei amount that will be paid)
       </div>
       <div>
-        <input type={'number'} value={amountAT3} onChange={(e) => setAmountAT3(e.target.value)}/>
+        <input type={'number'} value={amountAT3} onChange={(e) => setAmountAT3(e.target.value as unknown as number)}/>
       </div>
       <div>
         AT3 to Wei
       </div>
       <div>
-        <input type={'number'} value={amountETH} onChange={(e) => setAmountETH(e.target.value)}/>
+        <input type={'number'} value={amountETH} onChange={(e) => setAmountETH(e.target.value as unknown as number)}/>
       </div>
       <div>
         <button type={"button"} onClick={buy}>buy AT3</button>

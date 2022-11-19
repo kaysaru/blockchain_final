@@ -44,6 +44,7 @@ export default function Home() {
 
   async function handleGetStakedTokens() {
     let success = getStakedTokens();
+    // @ts-ignore
     setStakedTokens([]);
     if (await success) setOpen(true);
   }
@@ -98,7 +99,7 @@ export default function Home() {
           label="Enter token ID to stake"
           variant="filled"
           value={idToStake}
-          onChange={(e) => setIdToStake(e.target.value)}
+          onChange={(e) => setIdToStake(e.target.value as unknown as number)}
         />
         <Button variant="contained" onClick={handleStake}>
           Stake token
@@ -111,7 +112,7 @@ export default function Home() {
           label="Enter token ID to withdraw"
           variant="filled"
           value={idToWithdraw}
-          onChange={(e) => setIdToWithdraw(e.target.value)}
+          onChange={(e) => setIdToWithdraw(e.target.value as unknown as number)}
         />
         <Button variant="contained" onClick={handleWithdraw}>
           Withdraw token
