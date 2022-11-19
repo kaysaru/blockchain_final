@@ -3,6 +3,10 @@ import {Contract, providers, utils} from "ethers";
 import {NFT_CONTRACT_ABI, NFT_CONTRACT_ADDRESS} from "../../constants";
 import useWeb3 from "./useWeb3";
 import {JsonRpcSigner, Web3Provider} from "@ethersproject/providers";
+import {Button, Typography} from "@mui/material";
+
+import CircularProgress from '@mui/material/CircularProgress';
+import SendIcon from '@mui/icons-material/Send';
 
 export default function useNFTMint() {
   // presaleStarted keeps track of whether the presale has started or not
@@ -210,32 +214,32 @@ export default function useNFTMint() {
     // If wallet is not connected, return a button which allows them to connect their wllet
     if (!walletConnected) {
       return (
-        <button onClick={connectWallet}>
+        <Button variant="contained" size="large" endIcon={<SendIcon />} onClick={connectWallet}>
           Connect your wallet
-        </button>
+        </Button>
       );
     }
 
     // If we are currently waiting for something, return a loading button
     if (loading) {
-      return <button>Loading...</button>;
+      return <Button variant="contained" size="large" endIcon={<CircularProgress color="secondary" />}>Loading...</Button>;
     }
 
     // If connected user is the owner, and presale hasnt started yet, allow them to start the presale
     if (isOwner && !presaleStarted) {
       return (
-        <button onClick={startPresale}>
+        <Button variant="contained" size="large" onClick={startPresale}>
           Start Presale!
-        </button>
+        </Button>
       );
     }
 
     // If connected user is not the owner but presale hasn't started yet, tell them that
     if (!presaleStarted) {
       return (
-        <div>
-          <div>Presale hasnt started!</div>
-        </div>
+        <Typography>
+          Presale hasnt started!
+        </Typography>
       );
     }
 
@@ -243,13 +247,13 @@ export default function useNFTMint() {
     if (presaleStarted && !presaleEnded) {
       return (
         <div>
-          <div>
+          <Typography>
             Presale has started!!! If your address is whitelisted, Mint a Crypto
             Dev 🥳
-          </div>
-          <button onClick={presaleMint}>
+          </Typography>
+          <Button variant="contained" size="large" onClick={presaleMint}>
             Presale Mint 🚀
-          </button>
+          </Button>
         </div>
       );
     }
@@ -257,9 +261,9 @@ export default function useNFTMint() {
     // If presale started and has ended, its time for public minting
     if (presaleStarted && presaleEnded) {
       return (
-        <button onClick={publicMint}>
+        <Button variant="contained" size="large" onClick={publicMint}>
           Public Mint 🚀
-        </button>
+        </Button>
       );
     }
   };

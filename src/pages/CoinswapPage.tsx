@@ -4,6 +4,7 @@ import useCoinswap from "../hooks/useCoinswap";
 
 export default function CoinswapPage() {
   const {buy, sell, amountAT3, setAmountAT3, amountETH, setAmountETH, balanceOfAT3, DexAT3Balance} = useCoinswap();
+  // @ts-ignore
   return (
     <Container disableGutters={false}>
       <Box sx={{marginTop: "2em"}}>
@@ -13,7 +14,8 @@ export default function CoinswapPage() {
         <Typography variant={"h3"} textAlign={"center"} sx={{margin: "1rem 0"}}>{DexAT3Balance}</Typography>
       </Box>
       <Divider sx={{margin: "2em 0"}}/>
-      <Grid container spacing={2} align="center" sx={{padding: "0"}}>
+      {/* @ts-ignore */}
+      <Grid container spacing={2} align="center">
         <Grid item xs={5}>
           <Paper elevation={2} sx={{
             height: "18em",
