@@ -4,32 +4,20 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {
-  Container
+  Container, Divider, Tab, Tabs
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
+import {useState} from "react";
 
 const pages = ['coinswap', 'nftstake', 'mintnft'];
 
 export default function MenuAppBar() {
+  const [value, setValue] = useState("")
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  function handleChange(event: React.SyntheticEvent, newValue: string) {
+    setValue(newValue)
+  }
 
   return (
     <AppBar position="static">
@@ -52,20 +40,24 @@ export default function MenuAppBar() {
             <Link to={'/'} style={{textDecoration: "none", color: "white"}}>KANSwap</Link>
           </Typography>
 
-
-          <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-            {pages.map((page) => (
-              <Link to={page}>
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{my: 2, color: 'white', display: 'block'}}
-                >
-                  {page}
-                </Button>
-              </Link>
-            ))}
-          </Box>
+        </Toolbar>
+        <Divider/>
+        <Toolbar>
+          <Box>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              textColor="inherit"
+              indicatorColor="primary"
+            >
+              {pages.map((page) => {
+                return (
+                  <Link to={page} key={page}>
+                    <Tab value={page} label={page.toUpperCase()}/>
+                  </Link>
+                )
+              })}
+            </Tabs></Box>
 
         </Toolbar>
       </Container>

@@ -1,5 +1,4 @@
 import {useState, useEffect, useRef, SyntheticEvent, forwardRef} from "react";
-import {BigNumber} from "ethers";
 import useStake from "../hooks/useStake";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -22,8 +21,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Home() {
-  const zero = BigNumber.from(0);
-
   const {
     stake,
     getStakedTokens,
@@ -73,7 +70,7 @@ export default function Home() {
 
   async function handleCheckRewards() {
     let success = await availableRewards();
-    if (await success) setOpen(true);
+    if (success) setOpen(true);
   }
 
   return (

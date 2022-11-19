@@ -3,6 +3,7 @@ import NFTStake from "../pages/NFTStake";
 import ErrorPage from "../pages/ErrorPage";
 import CoinswapPage from "../pages/CoinswapPage";
 import MintNFTPage from "../pages/MintNFTPage";
+import Index from "../pages/Index";
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
     element: <App/>,
     errorElement: <ErrorPage/>,
     children: [
+      {
+        path: 'index',
+        element: <Index/>
+      },
       {
         path: "nftstake",
         element: <NFTStake/>,
