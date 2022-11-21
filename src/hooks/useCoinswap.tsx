@@ -1,38 +1,39 @@
-import {BigNumberish, Contract, utils} from "ethers";
+import { BigNumberish, Contract, utils } from "ethers";
 import {
   COINSWAP_CONTRACT_ABI,
-  COINSWAP_CONTRACT_ADDRESS, ERC20_CONTRACT_ABI, ERC20_CONTRACT_ADDRESS
+  COINSWAP_CONTRACT_ADDRESS,
+  ERC20_CONTRACT_ABI,
+  ERC20_CONTRACT_ADDRESS,
 } from "../../constants";
 import useWeb3 from "./useWeb3";
-import {useEffect, useState} from "react";
-import {JsonRpcSigner, Web3Provider} from "@ethersproject/providers";
-
+import { useEffect, useState } from "react";
+import { JsonRpcSigner } from "@ethersproject/providers";
 
 export default function UseCoinswap() {
   const [isLoading, setLoading] = useState(false);
   const [amountAT3, setAmountAT3] = useState(0);
   const [amountETH, setAmountETH] = useState(0);
-  const [balanceOfAT3, setBalanceOfAT3] = useState(0)
-  const [DexAT3Balance, setDexAT3Balance] = useState(0)
-  const {
-    getProviderOrSigner,
-    connectWallet,
-    walletConnected,
-    setWalletConnected,
-    web3ModalRef,
-  } = useWeb3();
+  const [balanceOfAT3, setBalanceOfAT3] = useState(0);
+  const [DexAT3Balance, setDexAT3Balance] = useState(0);
+  const { getProviderOrSigner } = useWeb3();
 
   useEffect(() => {
-    fetchBalanceOfAT3().then(r => r)
-    getDexBalance().then(r => setDexAT3Balance(r))
-  })
+    fetchBalanceOfAT3().then((r) => r);
+    getDexBalance().then((r) => setDexAT3Balance(r));
+  });
 
   async function fetchBalanceOfAT3() {
-    let signer: JsonRpcSigner = await getProviderOrSigner(true) as JsonRpcSigner
-    const contract = new Contract(ERC20_CONTRACT_ADDRESS, ERC20_CONTRACT_ABI, signer);
+    let signer: JsonRpcSigner = (await getProviderOrSigner(
+      true
+    )) as JsonRpcSigner;
+    const contract = new Contract(
+      ERC20_CONTRACT_ADDRESS,
+      ERC20_CONTRACT_ABI,
+      signer
+    );
     let balance: BigNumberish = await contract.balanceOf(signer.getAddress());
-    balance = utils.formatUnits(balance, 6) as unknown as number
-    setBalanceOfAT3(balance)
+    balance = utils.formatUnits(balance, 6) as unknown as number;
+    setBalanceOfAT3(balance);
   }
 
   async function buy(): Promise<boolean> {
@@ -44,12 +45,15 @@ export default function UseCoinswap() {
       signer
     );
     try {
-      let tx = await coinswapContract.buy({gasPrice: `${amountAT3}`, gasLimit: '1000000'});
+      let tx = await coinswapContract.buy({
+        gasPrice: `${amountAT3}`,
+        gasLimit: "1000000",
+      });
       await tx.wait();
       setLoading(false);
       return true;
     } catch (e) {
-      setLoading(false)
+      setLoading(false);
       console.error(e);
       return false;
     }
@@ -81,11 +85,27 @@ export default function UseCoinswap() {
       COINSWAP_CONTRACT_ABI,
       signer
     );
-    const erc20contract = new Contract(ERC20_CONTRACT_ADDRESS, ERC20_CONTRACT_ABI, signer);
-    let balance: BigNumberish = await erc20contract.balanceOf(coinswapContract.address);
-    balance = utils.formatUnits(balance, 6) as unknown as number
-    return balance
+    const erc20contract = new Contract(
+      ERC20_CONTRACT_ADDRESS,
+      ERC20_CONTRACT_ABI,
+      signer
+    );
+    let balance: BigNumberish = await erc20contract.balanceOf(
+      coinswapContract.address
+    );
+    balance = utils.formatUnits(balance, 6) as unknown as number;
+    return balance;
   }
 
-  return {buy, sell, isLoading, amountAT3, setAmountAT3, amountETH, setAmountETH, balanceOfAT3, DexAT3Balance}
+  return {
+    buy,
+    sell,
+    isLoading,
+    amountAT3,
+    setAmountAT3,
+    amountETH,
+    setAmountETH,
+    balanceOfAT3,
+    DexAT3Balance,
+  };
 }

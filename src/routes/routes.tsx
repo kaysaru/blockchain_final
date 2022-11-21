@@ -7,28 +7,28 @@ import Index from "../pages/Index";
 
 const routes = [
   {
-    path: '/',
-    element: <App/>,
-    errorElement: <ErrorPage/>,
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: 'index',
-        element: <Index/>
+        path: "index",
+        element: <Index />,
       },
       {
         path: "nftstake",
-        element: <NFTStake/>,
+        element: <NFTStake />,
       },
       {
         path: "coinswap",
-        element: <CoinswapPage/>
+        element: <CoinswapPage />,
       },
       {
         path: "mintnft",
-        element: <MintNFTPage/>
-      }
+        element: <MintNFTPage />,
+      },
     ],
-  }
-]
+  },
+];
 
 export default routes;

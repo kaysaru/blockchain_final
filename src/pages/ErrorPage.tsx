@@ -19,7 +19,9 @@ export default function ErrorPage() {
             <Typography variant="h6">
               The page you’re looking for doesn’t exist.
             </Typography>
-            <Link to={"/index"}><Button variant="contained">Back Home</Button></Link>
+            <Link to={"/index"}>
+              <Button variant="contained">Back Home</Button>
+            </Link>
           </Grid>
           <Grid xs={6}>
             <img

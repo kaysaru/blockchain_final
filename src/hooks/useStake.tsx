@@ -1,10 +1,10 @@
-import {Contract, BigNumber} from "ethers";
-import {useState} from "react";
+import { Contract, BigNumber } from "ethers";
+import { useState } from "react";
 import {
   NFT_STAKING_CONTRACT_ADDRESS,
   NFT_STAKING_CONTRACT_ABI,
 } from "../../constants";
-import {JsonRpcSigner, Web3Provider} from "@ethersproject/providers";
+import { JsonRpcSigner } from "@ethersproject/providers";
 import useWeb3 from "./useWeb3";
 
 export default function useStake() {
@@ -13,13 +13,7 @@ export default function useStake() {
   const [idToWithdraw, setIdToWithdraw] = useState<number>();
   const [loading, setLoading] = useState(false);
   const [reward, setReward] = useState(0);
-  const {
-    getProviderOrSigner,
-    connectWallet,
-    walletConnected,
-    setWalletConnected,
-    web3ModalRef,
-  } = useWeb3();
+  const { getProviderOrSigner } = useWeb3();
 
   async function stake(idToStake: number): Promise<boolean> {
     const signer = await getProviderOrSigner(true);
@@ -32,7 +26,7 @@ export default function useStake() {
       let tx = await nftStakeContract.stake(idToStake);
       setLoading(true);
       let receipt = await tx.wait();
-      console.log(receipt)
+      console.log(receipt);
       setLoading(false);
       return true;
     } catch (e) {
@@ -53,7 +47,7 @@ export default function useStake() {
       setLoading(true);
       let tx = await nftStakeContract.withdraw(idToWithdraw);
       let receipt = await tx.wait();
-      console.log(receipt)
+      console.log(receipt);
       setLoading(false);
       return true;
     } catch (e) {
@@ -74,7 +68,7 @@ export default function useStake() {
       setLoading(true);
       let tx = await nftStakeContract.claimRewards();
       let receipt = await tx.wait();
-      console.log(receipt)
+      console.log(receipt);
       setLoading(false);
       return true;
     } catch (e) {
@@ -123,7 +117,7 @@ export default function useStake() {
         signer.getAddress()
       );
       setStakedTokens(st);
-      setLoading(false)
+      setLoading(false);
       return true;
     } catch (e) {
       setLoading(false);
