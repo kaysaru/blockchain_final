@@ -15,7 +15,7 @@ export default function CoinswapPage() {
       </Box>
       <Divider sx={{margin: "2em 0"}}/>
       {/* @ts-ignore */}
-      <Grid container spacing={2} align="center">
+      <Grid container spacing={2} align="center" alignItems="center">
         <Grid item xs={5}>
           <Paper elevation={2} sx={{
             height: "18em",
@@ -41,7 +41,13 @@ export default function CoinswapPage() {
 
           </Paper>
         </Grid>
-        <Grid item xs={2}><Typography>1 Wei = 1</Typography></Grid>
+        <Grid item xs={2}>
+          <Typography variant={"h4"}>
+            <div>1 Wei</div>
+            =
+            <div>1 AT3</div>
+          </Typography>
+        </Grid>
         <Grid item xs={5} sx={{justifyContent: "center"}}>
           <Paper elevation={2} sx={{
             height: "18em",

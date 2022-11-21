@@ -12,6 +12,7 @@ import MenuAppBar from "./components/Navbar";
 
 const router = createBrowserRouter(routes);
 
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <RouterProvider router={router}/>
 )

@@ -8,16 +8,20 @@ export default function useWeb3() {
   const [walletConnected, setWalletConnected] = useState(false);
   const web3ModalRef = useRef<Core>();
 
+  function connectOnLoad() {
+    web3ModalRef.current = new Web3Modal({
+      network: "goerli",
+      providerOptions: {},
+      disableInjectedProvider: false,
+    });
+    connectWallet();
+  }
+
   useEffect(() => {
     if (!walletConnected) {
-      web3ModalRef.current = new Web3Modal({
-        network: "goerli",
-        providerOptions: {},
-        disableInjectedProvider: false,
-      });
-      connectWallet();
+      connectOnLoad()
     }
-  }, [walletConnected]);
+  }, []);
 
   async function connectWallet() {
     try {
@@ -63,5 +67,6 @@ export default function useWeb3() {
     walletConnected,
     setWalletConnected,
     web3ModalRef,
+    connectOnLoad
   };
 }

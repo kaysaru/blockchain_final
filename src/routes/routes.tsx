@@ -28,10 +28,6 @@ const routes = [
         element: <MintNFTPage/>
       }
     ],
-  },
-  {
-    path: '/nftstake',
-    element: <NFTStake/>
   }
 ]
 
