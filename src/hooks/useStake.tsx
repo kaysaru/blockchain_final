@@ -1,10 +1,10 @@
-import { Contract, BigNumber } from "ethers";
-import { useState } from "react";
+import {Contract, BigNumber} from "ethers";
+import {useState} from "react";
 import {
   NFT_STAKING_CONTRACT_ADDRESS,
   NFT_STAKING_CONTRACT_ABI,
 } from "../../constants";
-import { JsonRpcSigner, Web3Provider } from "@ethersproject/providers";
+import {JsonRpcSigner, Web3Provider} from "@ethersproject/providers";
 import useWeb3 from "./useWeb3";
 
 export default function useStake() {
@@ -31,7 +31,8 @@ export default function useStake() {
     try {
       let tx = await nftStakeContract.stake(idToStake);
       setLoading(true);
-      tx.wait();
+      let receipt = await tx.wait();
+      console.log(receipt)
       setLoading(false);
       return true;
     } catch (e) {
@@ -51,10 +52,12 @@ export default function useStake() {
     try {
       setLoading(true);
       let tx = await nftStakeContract.withdraw(idToWithdraw);
-      tx.wait();
+      let receipt = await tx.wait();
+      console.log(receipt)
       setLoading(false);
       return true;
     } catch (e) {
+      setLoading(false);
       console.error(e);
       return false;
     }
@@ -70,11 +73,13 @@ export default function useStake() {
     try {
       setLoading(true);
       let tx = await nftStakeContract.claimRewards();
-      tx.wait();
+      let receipt = await tx.wait();
+      console.log(receipt)
       setLoading(false);
       return true;
     } catch (e) {
       console.error(e);
+      setLoading(false);
       return false;
     }
   }
@@ -88,7 +93,6 @@ export default function useStake() {
     );
     try {
       setLoading(true);
-      console.log(await signer.getAddress());
       setReward(
         (
           await nftStakeContract.availableRewards(await signer.getAddress())
@@ -98,6 +102,7 @@ export default function useStake() {
       return true;
     } catch (e) {
       console.error(e);
+      setLoading(false);
       return false;
     }
   }
@@ -111,8 +116,6 @@ export default function useStake() {
       NFT_STAKING_CONTRACT_ABI,
       signer
     );
-    console.log(signer);
-    console.log(nftStakeContract);
 
     try {
       setLoading(true);
@@ -120,15 +123,13 @@ export default function useStake() {
         signer.getAddress()
       );
       setStakedTokens(st);
+      setLoading(false)
       return true;
     } catch (e) {
+      setLoading(false);
       console.error(e);
       return false;
-    } finally {
-      setLoading(false);
     }
-
-    return false;
   }
 
   return {

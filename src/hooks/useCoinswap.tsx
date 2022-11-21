@@ -36,6 +36,7 @@ export default function UseCoinswap() {
   }
 
   async function buy(): Promise<boolean> {
+    setLoading(true);
     const signer = await getProviderOrSigner(true);
     let coinswapContract = new Contract(
       COINSWAP_CONTRACT_ADDRESS,
@@ -44,11 +45,11 @@ export default function UseCoinswap() {
     );
     try {
       let tx = await coinswapContract.buy({gasPrice: `${amountAT3}`, gasLimit: '1000000'});
-      setLoading(true);
-      tx.wait();
+      await tx.wait();
       setLoading(false);
       return true;
     } catch (e) {
+      setLoading(false)
       console.error(e);
       return false;
     }
