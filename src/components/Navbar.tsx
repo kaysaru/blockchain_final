@@ -9,7 +9,6 @@ import useWeb3 from "../hooks/useWeb3";
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
   paddingTop: theme.spacing(1),
-  // Override media queries injected by theme.mixins.toolbar
   "@media all": {
     minHeight: 128,
   },
@@ -30,15 +29,6 @@ export default function MenuAppBar() {
   return (
     <AppBar position="static" color="primary">
       <StyledToolbar>
-        {/* <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton> */}
         <Typography
           variant="h5"
           noWrap
@@ -53,7 +43,7 @@ export default function MenuAppBar() {
             textDecoration: "none",
           }}
         >
-          KANSwap
+          <Link to={"/"}>KANSwap</Link>
         </Typography>
         <Tabs
           value={value}
@@ -62,9 +52,10 @@ export default function MenuAppBar() {
           textColor="inherit"
           indicatorColor="secondary"
         >
+          <Tab component={Link} to={"/"} label="Start" />
+          <Tab component={Link} to={"/mintnft"} label="Mint" />
           <Tab component={Link} to={"/coinswap"} label="Swap Coins" />
           <Tab component={Link} to={"/nftstake"} label="Stake" />
-          <Tab component={Link} to={"/mintnft"} label="Mint" />
         </Tabs>
         <Button
           variant="outlined"

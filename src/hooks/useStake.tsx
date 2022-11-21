@@ -26,7 +26,6 @@ export default function useStake() {
       let tx = await nftStakeContract.stake(idToStake);
       setLoading(true);
       let receipt = await tx.wait();
-      console.log(receipt);
       setLoading(false);
       return true;
     } catch (e) {
@@ -47,7 +46,6 @@ export default function useStake() {
       setLoading(true);
       let tx = await nftStakeContract.withdraw(idToWithdraw);
       let receipt = await tx.wait();
-      console.log(receipt);
       setLoading(false);
       return true;
     } catch (e) {
@@ -68,7 +66,6 @@ export default function useStake() {
       setLoading(true);
       let tx = await nftStakeContract.claimRewards();
       let receipt = await tx.wait();
-      console.log(receipt);
       setLoading(false);
       return true;
     } catch (e) {

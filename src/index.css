@@ -1,9 +1,24 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+#bunny {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0% {
+    transform: translate(10px, -10px);
+  }
+  50% {
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    transform: translate(10px, -10px);
+  }
 }
